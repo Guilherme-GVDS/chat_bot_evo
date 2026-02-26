@@ -49,10 +49,15 @@ services:
       - evolution-api
       - redis
     restart: always
+    volumes:
+      - ./data/vectorstore:/app/rag/vectorstore
+      - ./data/rag_files:/app/rag/rag_files
 
 volumes:
   evolution_instances:
   postgres_data:
   redis:
+  rag_files:
+  vectorstore:
 
   
