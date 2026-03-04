@@ -4,7 +4,4 @@ from core.config import REDIS_URL
 
 
 def get_session_history(session_id):
-    return RedisChatMessageHistory(
-        session_id=session_id,
-        url=REDIS_URL
-    )
+    return RedisChatMessageHistory(session_id=session_id, url=REDIS_URL)
