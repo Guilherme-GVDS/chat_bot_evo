@@ -42,6 +42,10 @@ def get_vectorstore():
         )
         split = text_splitter.split_documents(docs)
         return Chroma.from_documents(
-            documents=split, embedding=embedding, persist_directory=VECTOR_STORE_PATH
+            documents=split,
+            embedding=embedding,
+            persist_directory=VECTOR_STORE_PATH
         )
-    return Chroma(embedding_function=embedding, persist_directory=VECTOR_STORE_PATH)
+    return Chroma(embedding_function=embedding,
+                  persist_directory=VECTOR_STORE_PATH
+                  )

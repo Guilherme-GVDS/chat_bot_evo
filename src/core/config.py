@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-GROQ_MODEL_TEMPERATURE = os.getenv("GROQ_MODEL_TEMPERATURE")
+GROQ_MODEL_TEMPERATURE = float(os.getenv("GROQ_MODEL_TEMPERATURE"))
 GROQ_MODEL_NAME = os.getenv("GROQ_MODEL_NAME")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 EVOLUTION_API_URL = os.getenv("EVOLUTION_API_URL")

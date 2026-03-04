@@ -18,7 +18,9 @@ def get_rag_chain():
     history_aware_chain = create_history_aware_retriever(
         llm, retriever, contextualize_prompt
     )
-    question_answer_chain = create_stuff_documents_chain(llm=llm, prompt=qa_prompt)
+    question_answer_chain = create_stuff_documents_chain(
+        llm=llm,
+        prompt=qa_prompt)
     return create_retrieval_chain(history_aware_chain, question_answer_chain)
 
 
