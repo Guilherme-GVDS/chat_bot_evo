@@ -20,7 +20,7 @@ class EvolutionAPI:
         self.__client = httpx.AsyncClient(timeout=10.0)
 
     async def send_message(self, chat_id: str, message: str) -> dict:
-        url = f"{self.__api_url}/message/sendText/{self.__instance_name}"
+        url = f'{self.__api_url}/message/sendText/{self.__instance_name}'
         payload = {'number': chat_id, 'text': message}
         response = await self.__client.post(
             url,

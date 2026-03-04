@@ -8,8 +8,9 @@ app = FastAPI()
 @app.post("/webhook")
 async def webhook(request: Request):
     data = await request.json()
-    chat_id = data.get("data").get("key").get("remoteJid")
-    message = data.get("data").get("message").get("conversation")
+    data_block = data.get("data") or {}
+    chat_id = (data_block.get("key") or {}).get("remoteJid")
+    message = (data_block.get("message") or {}).get("conversation")
 
     if chat_id and message and "@g.us" not in chat_id:
         await buffer_message(chat_id, message)

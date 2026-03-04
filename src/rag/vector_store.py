@@ -30,7 +30,13 @@ def load_documents():
     return docs
 
 
+_vectorstore = None
+
+
 def get_vectorstore():
+    global _vectorstore
+    if _vectorstore is not None:
+        return _vectorstore
     docs = load_documents()
     embedding = HuggingFaceEndpointEmbeddings(
         huggingfacehub_api_token=HUGGINGFACE_API_KEY,
@@ -38,14 +44,17 @@ def get_vectorstore():
     )
     if docs:
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000, chunk_overlap=200
-        )
+            chunk_size=1000,
+            chunk_overlap=200
+            )
+
         split = text_splitter.split_documents(docs)
-        return Chroma.from_documents(
+        _vectorstore = Chroma.from_documents(
             documents=split,
             embedding=embedding,
             persist_directory=VECTOR_STORE_PATH
-        )
-    return Chroma(embedding_function=embedding,
-                  persist_directory=VECTOR_STORE_PATH
-                  )
+            )
+    else:
+        _vectorstore = Chroma(embedding_function=embedding,
+                              persist_directory=VECTOR_STORE_PATH)
+    return _vectorstore
