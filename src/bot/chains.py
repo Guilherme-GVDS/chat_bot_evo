@@ -15,9 +15,12 @@ from rag.vector_store import get_vectorstore
 def get_rag_chain():
     llm = ChatGroq(model=GROQ_MODEL_NAME, temperature=GROQ_MODEL_TEMPERATURE)
     retriever = get_vectorstore().as_retriever()
+    # Reformula a pergunta do usuário levando em conta o histórico da conversa,
+    # para que a busca no vectorstore seja independente do contexto anterior
     history_aware_chain = create_history_aware_retriever(
         llm, retriever, contextualize_prompt
     )
+    # Combina os documentos recuperados com a pergunta para gerar a resposta final
     question_answer_chain = create_stuff_documents_chain(
         llm=llm,
         prompt=qa_prompt)
@@ -26,10 +29,13 @@ def get_rag_chain():
 
 def get_conversational_rag_chain():
     rag_chain = get_rag_chain()
+
+    # Envolve a RAG chain com gerenciamento de histórico por sessão —
+    # cada chat_id do WhatsApp é uma sessão independente no Redis
     return RunnableWithMessageHistory(
         runnable=rag_chain,
         get_session_history=get_session_history,
-        input_messages_key="input",
-        history_messages_key="chat_history",
-        output_messages_key="answer",
+        input_messages_key='input',
+        history_messages_key='chat_history',
+        output_messages_key='answer',
     )

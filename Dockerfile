@@ -11,5 +11,5 @@ COPY src/ .
 
 EXPOSE 8000
 
-CMD uvicorn chat_bot_evo.app:app --host 0.0.0.0 --port 8000
+CMD ["uvicorn", "chat_bot_evo.app:app", "--host", "0.0.0.0", "--port", "8000"]
 
