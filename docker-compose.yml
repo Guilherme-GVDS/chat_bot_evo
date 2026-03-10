@@ -4,6 +4,8 @@ services:
     container_name: evolution_api
     image: evoapicloud/evolution-api:v2.3.1
     restart: always
+    ports:
+      - "8080:8080"
     env_file:
       - .env
     volumes:
@@ -39,6 +41,8 @@ services:
     container_name: bot
     env_file:
       - .env
+    ports:
+      - "8000:8000"
     depends_on:
       - evolution-api
       - redis
