@@ -73,8 +73,10 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
-data/
+data/rag_files/*
+data/vectorstore/*
+!data/rag_files/.gitkeep
+!data/vectorstore/.gitkeep
 # PyBuilder
 .pybuilder/
 target/
