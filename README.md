@@ -64,11 +64,6 @@ Edite o `.env` e preencha os valores obrigatórios:
 
 Coloque arquivos `.txt` ou `.pdf` na pasta `data/rag_files/`. Eles serão indexados automaticamente na primeira inicialização do bot.
 
-```bash
-mkdir -p data/rag_files
-cp meu_documento.pdf data/rag_files/
-```
-
 > Após a indexação, os arquivos são movidos automaticamente para `data/rag_files/processed/`.
 
 ### 4. Suba os containers
